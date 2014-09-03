@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarieCurie.RedirectUtility", "MarieCurie.RedirectUtility\MarieCurie.RedirectUtility.csproj", "{EC22BB0B-C4C9-4A38-886E-5292E90CA8DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedirectConsoleHarness", "RedirectConsoleHarness\RedirectConsoleHarness.csproj", "{783F91D0-C5D9-4D5D-9022-2AFCD2088474}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC22BB0B-C4C9-4A38-886E-5292E90CA8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC22BB0B-C4C9-4A38-886E-5292E90CA8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC22BB0B-C4C9-4A38-886E-5292E90CA8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC22BB0B-C4C9-4A38-886E-5292E90CA8DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{783F91D0-C5D9-4D5D-9022-2AFCD2088474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{783F91D0-C5D9-4D5D-9022-2AFCD2088474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{783F91D0-C5D9-4D5D-9022-2AFCD2088474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{783F91D0-C5D9-4D5D-9022-2AFCD2088474}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
