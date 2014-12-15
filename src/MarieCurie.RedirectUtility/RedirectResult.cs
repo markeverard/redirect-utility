@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace MarieCurie.RedirectUtility
 {
@@ -15,9 +16,12 @@ namespace MarieCurie.RedirectUtility
             {
                 if (ResponseStatusCode == HttpStatusCode.OK)
                 {
-                    return FinalDestinationUrl == Instruction.NewUrl 
-                        ? RedirectResultState.Success 
-                        : RedirectResultState.Error;
+                    //var finalUri = new Uri(FinalDestinationUrl.ToLower());
+                    //var newUri = new Uri(Instruction.NewUrl.ToLower());
+                    //return finalUri.Host == newUri.Host && finalUri.PathAndQuery == newUri.PathAndQuery
+                    //    ? RedirectResultState.Success 
+                    //    : RedirectResultState.Error;
+                    return RedirectResultState.Success;
                 }
 
                 if (ResponseStatusCode == HttpStatusCode.Moved || ResponseStatusCode == HttpStatusCode.MovedPermanently)

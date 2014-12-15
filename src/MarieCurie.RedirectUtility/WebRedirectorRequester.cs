@@ -23,7 +23,7 @@ namespace MarieCurie.RedirectUtility
             foreach (var instruction in instructionsList)
             {
                 var request = (HttpWebRequest)WebRequest.Create(instruction.OldUrl);
-                request.Method = "GET";
+                request.Method = "HEAD";
                 request.Timeout = 10000;
                 
                 //request.AllowAutoRedirect = false;
