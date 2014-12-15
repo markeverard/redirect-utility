@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace MarieCurie.RedirectUtility
 {
-    public class ConfigFileReader
+    public class ConfigFileReader : IConfigFileReader
     {
-        private string _fileName;
+        private readonly string _fileName;
 
         public ConfigFileReader(string fileName)
         {
             _fileName = fileName;
         }
 
-        public IEnumerable<string> GetSourceUrlsFromRewriteMap()
+        public IEnumerable<RedirectInstruction> GetInstructionsFromRewriteMap(int number = 10)
         {
             var configMap = XDocument.Load(_fileName);
             return
                 configMap.Elements("rewriteMaps")
                     .Elements("rewriteMap")
                     .Elements("add")
-                    .Select(e => e.Attribute("key").Value).Take(10);
+                    .Select(e => new RedirectInstruction() { OldUrl = e.Attribute("key").Value, NewUrl = e.Attribute("value").Value})
+                    .Take(number);
         }
     }
 }

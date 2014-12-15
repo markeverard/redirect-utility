@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using System.Net.Security;
 using System.Text;
-using System.Threading.Tasks;
 using MarieCurie.RedirectUtility;
 
 namespace RedirectTestConsole
@@ -13,36 +10,40 @@ namespace RedirectTestConsole
     {
         static void Main(string[] args)
         {
-            const string inputFileName = @"C:\Users\edmund.ward\Documents\redirect-utility\src\RedirectTestConsole\rewritemaps.config";
-            const string outputFilename = "redirect";
+            const string inputFileName = @"..\..\Data\rewriteMaps.Staging.config";
+            const string outputFile = @"..\..\Data\BadRedirectResults.txt";
+            const string logOutputFile = @"..\..\Data\ExecutionLog.txt";
 
-            var reader = new ConfigFileReader(inputFileName);
+            IConfigFileReader reader = new ConfigFileReader(inputFileName);
+            IFilePersister persistor = new FilePersistor(outputFile);
 
-            var urls = reader.GetSourceUrlsFromRewriteMap();
+            var stopwatch = Stopwatch.StartNew();
 
-            ServicePointManager.ServerCertificateValidationCallback = new
-                RemoteCertificateValidationCallback
-                (
-                delegate { return true; }
-                );
+            var instructions = reader.GetInstructionsFromRewriteMap(50000).ToList();
 
-            foreach (var url in urls)
-            {
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-                //httpWebRequest.Method = WebRequestMethods.Http.Head;
-                try
-                {
-                    var httpResponse = (HttpWebResponse) httpWebRequest.GetResponse();
-                    Console.WriteLine(string.Format("Success: {0} {1}", url, httpResponse.StatusCode));
-                }
-                catch (Exception ex)
-                {
-                    var webException = ex as WebException;
-                    Console.WriteLine(string.Format("Fail: {0} {1}", url, webException.Status));
-                }
-                
-            }
+            var tester = new WebRedirectorRequester();
+            var results = tester.ValidateInstructions(instructions).ToList();
+
+            var goodResults = results.Where(r => r.State == RedirectResultState.Success).ToList();
+            var badResults = results.Where(r => r.State != RedirectResultState.Success).ToList();
+
+            var sb = new StringBuilder();
+            foreach (var result in badResults)
+                sb.AppendLine(result.ToString());
+
+            persistor.Save(sb.ToString());
+
+            stopwatch.Stop();
+           
+            var log = string.Format("Inspected {0} redirects | {1} SUCCESS | {2} FAILURE | {3} seconds", instructions.Count, goodResults.Count, badResults.Count, stopwatch.Elapsed.TotalSeconds);
+            persistor = new FilePersistor(logOutputFile);
+            persistor.Save(log);
+
+            Console.WriteLine(log);
+            Console.WriteLine("Hit any key to exit.");
             Console.ReadLine();
         }
+
+        
     }
 }

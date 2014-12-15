@@ -2,20 +2,20 @@
 
 namespace MarieCurie.RedirectUtility
 {
-    public class ConfigFilePersistor : IRedirectPersister
+    public class FilePersistor : IFilePersister
     {
         private readonly string _filePath;
 
-        public ConfigFilePersistor(string filePath)
+        public FilePersistor(string filePath)
         {
             _filePath = filePath;
         }
 
-        public void Save(string formattedRedirects)
+        public void Save(string stringToWrite)
         {
             using (var writer = new StreamWriter(_filePath))
             {
-                writer.WriteLine(formattedRedirects);
+                writer.WriteLine(stringToWrite);
             }
         }
     }

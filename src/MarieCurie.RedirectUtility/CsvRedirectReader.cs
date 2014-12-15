@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace MarieCurie.RedirectUtility
 {
@@ -15,10 +13,10 @@ namespace MarieCurie.RedirectUtility
             _fileName = fileName;
         }
 
-        public IEnumerable<Redirect> GetRedirectItems()
+        public IEnumerable<RedirectInstruction> GetRedirectItems()
         {
             var reader = new StreamReader(File.OpenRead(_fileName));
-            var redirectList = new List<Redirect>();
+            var redirectList = new List<RedirectInstruction>();
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
@@ -37,7 +35,7 @@ namespace MarieCurie.RedirectUtility
                 if (existingKey != null)
                     continue;
 
-                var redirect = new Redirect {OldUrl = values[0], NewUrl = values[1]};
+                var redirect = new RedirectInstruction {OldUrl = values[0], NewUrl = values[1]};
                 redirectList.Add(redirect);
             }
 

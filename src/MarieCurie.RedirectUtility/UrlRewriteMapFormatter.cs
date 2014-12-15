@@ -8,7 +8,7 @@ namespace MarieCurie.RedirectUtility
     {
         private const string rewriteMapFormatter = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rewriteMaps>\n\t<rewriteMap name=\"PermanentRedirects\">{0}</rewriteMap>\n</rewriteMaps>";
 
-        public string ToString(IEnumerable<Redirect> redirectItems)
+        public string ToString(IEnumerable<RedirectInstruction> redirectItems)
         {
             var sb = new StringBuilder();
             sb.AppendLine();

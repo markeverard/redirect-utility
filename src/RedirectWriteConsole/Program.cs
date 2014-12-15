@@ -2,21 +2,22 @@
 using System.Linq;
 using MarieCurie.RedirectUtility;
 
-namespace RedirectConsoleHarness
+namespace RedirectWriteConsole
 {
     class Program
     {
         static void Main(string[] args)
         {
-            const string outputFileName = "rewritemaps.config";
-            
+            const string inputCsvFile = @"..\..\Data\example-redirects.csv";
+            const string outputFileName = @"..\..\Data\rewritemaps.config";
+
             IOutputFormatter formatter = new UrlRewriteMapFormatter();
-            IRedirectReader reader = new CsvRedirectReader("shop.csv");
-            IRedirectPersister persistor = new ConfigFilePersistor(outputFileName);
+            IRedirectReader reader = new CsvRedirectReader(inputCsvFile);
+            IFilePersister persistor = new FilePersistor(outputFileName);
 
             var items = reader.GetRedirectItems().ToList();
             Console.WriteLine("Found {0} redirects", items.Count);
-            
+
             var formattedOutput = formatter.ToString(items);
             persistor.Save(formattedOutput);
 

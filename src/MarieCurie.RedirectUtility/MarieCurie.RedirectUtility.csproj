@@ -40,14 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigFilePersistor.cs" />
+    <Compile Include="FilePersistor.cs" />
     <Compile Include="ConfigFileReader.cs" />
     <Compile Include="CsvRedirectReader.cs" />
+    <Compile Include="IConfigFileReader.cs" />
     <Compile Include="IRedirectPersister.cs" />
     <Compile Include="IOutputFormatter.cs" />
     <Compile Include="IRedirectReader.cs" />
+    <Compile Include="IWebRedirectRequester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Redirect.cs" />
+    <Compile Include="RedirectInstruction.cs" />
+    <Compile Include="RedirectResult.cs" />
+    <Compile Include="RedirectResultState.cs" />
+    <Compile Include="WebRedirectorRequester.cs" />
     <Compile Include="UrlRewriteMapFormatter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

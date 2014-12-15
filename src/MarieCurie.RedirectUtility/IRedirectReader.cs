@@ -4,6 +4,6 @@ namespace MarieCurie.RedirectUtility
 {
     public interface IRedirectReader
     {
-        IEnumerable<Redirect> GetRedirectItems();
+        IEnumerable<RedirectInstruction> GetRedirectItems();
     }
 }

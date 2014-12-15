@@ -1,7 +1,7 @@
 ﻿namespace MarieCurie.RedirectUtility
 {
-    public interface IRedirectPersister
+    public interface IFilePersister
     {
-        void Save(string formattedRedirects);
+        void Save(string stringToWrite);
     }
 }
